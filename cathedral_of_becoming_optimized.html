@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>CATHEDRAL OF BECOMING — Royal Interstellar Experience</title>
+<meta name="description" content="A self-contained, device-aware, cinematic cosmic website built from five uploaded HTML concepts: anomaly, singularity, nebula, cosmos, and lumina." />
+<style>
+:root{
+  --void:#03040a;
+  --void2:#080514;
+  --ink:#f7f2de;
+  --muted:rgba(247,242,222,.62);
+  --dim:rgba(247,242,222,.32);
+  --line:rgba(255,226,149,.17);
+  --gold:#f6d37a;
+  --gold2:#b58431;
+  --blue:#86e7ff;
+  --violet:#8a6aff;
+  --rose:#ff5f9e;
+  --green:#84ffc5;
+  --glass:rgba(8,9,18,.50);
+  --glass2:rgba(255,255,255,.045);
+  --shadow:0 24px 120px rgba(0,0,0,.8);
+  --serif: Georgia, 'Times New Roman', serif;
+  --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mono:'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  --nav-h:72px;
+  --section-pad: clamp(72px, 10vw, 150px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:#000;scroll-behavior:smooth;color-scheme:dark}
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 50% -20%, rgba(99,92,255,.28), transparent 45vw),
+    radial-gradient(circle at 100% 20%, rgba(255,150,65,.12), transparent 35vw),
+    radial-gradient(circle at 0% 55%, rgba(39,232,255,.10), transparent 42vw),
+    linear-gradient(180deg,#03040a 0%,#05020a 44%,#02030a 100%);
+  line-height:1.5;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background:
+    linear-gradient(90deg, transparent 0 97%, rgba(255,255,255,.025) 98% 100%) 0 0/56px 56px,
+    linear-gradient(0deg, transparent 0 97%, rgba(255,255,255,.02) 98% 100%) 0 0/56px 56px;
+  mask-image:radial-gradient(circle at 50% 35%, #000, transparent 72%);
+  opacity:.68;
+}
+body::after{
+  content:"";position:fixed;inset:0;z-index:999;pointer-events:none;opacity:.22;
+  background:repeating-linear-gradient(180deg,rgba(255,255,255,.06) 0 1px,transparent 1px 4px);
+  mix-blend-mode:soft-light;
+}
+body[data-phase="anomaly"]{--gold:#ffd06b;--blue:#ff4d8a;--violet:#8b7cff;--rose:#ff3867;--green:#85ffe7}
+body[data-phase="singularity"]{--gold:#d8e7ff;--blue:#00ffcc;--violet:#2142ff;--rose:#ff1d68;--green:#00ffcc}
+body[data-phase="nebula"]{--gold:#ffe7ff;--blue:#6cf6ff;--violet:#a35cff;--rose:#ff60c5;--green:#baffff}
+body[data-phase="cosmos"]{--gold:#f0a05a;--blue:#4fd1c5;--violet:#7c6ff7;--rose:#ff7d7d;--green:#8fffc1}
+body[data-phase="lumina"]{--gold:#a0ffd7;--blue:#00f2fe;--violet:#4facfe;--rose:#f093fb;--green:#bbff8d}
+body[data-phase="crown"]{--gold:#f9d978;--blue:#87ecff;--violet:#7d5cff;--rose:#ff5c86;--green:#b6ffde}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer;background:none;border:0}
+a{color:inherit;text-decoration:none}
+::selection{background:rgba(246,211,122,.35);color:#fff}
+#cosmic-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:0;background:#02030a}
+#grain{position:fixed;inset:-50%;z-index:2;pointer-events:none;opacity:.075;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");animation:grainDrift 22s steps(6,end) infinite;mix-blend-mode:screen}
+@keyframes grainDrift{0%{transform:translate(0,0)}25%{transform:translate(-4%,3%)}50%{transform:translate(2%,-5%)}75%{transform:translate(5%,1%)}100%{transform:translate(0,0)}}
+.skip{position:fixed;top:12px;left:12px;z-index:1000;background:#fff;color:#000;padding:8px 12px;transform:translateY(-160%)}
+.skip:focus{transform:none}
+nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:50;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  padding:0 clamp(18px,4vw,68px);
+  background:linear-gradient(180deg,rgba(2,3,10,.76),rgba(2,3,10,.36),transparent);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.055);
+}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:12px;letter-spacing:.25em;text-transform:uppercase;color:var(--gold)}
+.brand-mark{width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:50%;box-shadow:0 0 35px rgba(246,211,122,.17),inset 0 0 24px rgba(246,211,122,.08);position:relative}
+.brand-mark::before,.brand-mark::after{content:"";position:absolute;border:1px solid rgba(246,211,122,.28);border-radius:50%;inset:5px;transform:rotate(30deg) scaleX(1.45)}
+.brand-mark::after{transform:rotate(-42deg) scaleX(1.45)}
+.nav-center{display:flex;align-items:center;gap:6px;padding:6px;border:1px solid rgba(255,255,255,.08);border-radius:999px;background:rgba(255,255,255,.035)}
+.nav-center a,.mode-pill{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:9px 13px;border-radius:999px;transition:.25s ease}
+.nav-center a:hover,.mode-pill:hover{background:rgba(255,255,255,.07);color:var(--ink)}
+.nav-right{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.icon-btn{min-width:42px;height:42px;border:1px solid rgba(255,255,255,.09);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.035);color:var(--muted);transition:.25s ease;position:relative;overflow:hidden}
+.icon-btn:hover{color:var(--gold);border-color:rgba(246,211,122,.35);box-shadow:0 0 35px rgba(246,211,122,.11)}
+.icon-btn::before{content:"";position:absolute;inset:-60%;background:conic-gradient(from 90deg,transparent,var(--gold),transparent);opacity:0;transition:.25s;animation:spin 3s linear infinite}.icon-btn:hover::before{opacity:.16}.icon-btn span{position:relative;z-index:1;font-family:var(--mono);font-size:11px}.mobile-menu-btn{display:none}
+main{position:relative;z-index:3}
+.section{position:relative;min-height:100vh;padding:calc(var(--nav-h) + 24px) clamp(18px,5vw,80px) var(--section-pad)}
+.hero{display:grid;place-items:center;text-align:center;overflow:hidden;padding-top:calc(var(--nav-h) + 60px)}
+.crown-orbit{position:absolute;left:50%;top:49%;width:min(82vw,920px);aspect-ratio:1;border:1px solid rgba(246,211,122,.13);border-radius:50%;transform:translate(-50%,-50%);box-shadow:inset 0 0 90px rgba(246,211,122,.055);pointer-events:none;animation:orbitalSpin 34s linear infinite}
+.crown-orbit.o2{width:min(92vw,1120px);animation-duration:52s;animation-direction:reverse;border-color:rgba(134,231,255,.11)}
+.crown-orbit.o3{width:min(68vw,700px);animation-duration:28s;border-color:rgba(255,95,158,.10)}
+.crown-orbit::after{content:"";position:absolute;top:-4px;left:50%;width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 30px var(--gold)}
+@keyframes orbitalSpin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+.hero-shell{position:relative;width:min(1200px,100%);padding:clamp(32px,7vw,80px);border:1px solid rgba(246,211,122,.14);border-radius:clamp(28px,5vw,72px);background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.08),rgba(255,255,255,.025) 38%,rgba(0,0,0,.18));box-shadow:var(--shadow), inset 0 1px rgba(255,255,255,.15);isolation:isolate;overflow:hidden}
+.hero-shell::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,transparent,rgba(246,211,122,.12),transparent 55%);transform:translateX(-110%);animation:sweep 7s ease-in-out infinite;pointer-events:none}.hero-shell::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.06);border-radius:inherit;pointer-events:none}
+@keyframes sweep{0%,32%{transform:translateX(-120%)}62%,100%{transform:translateX(120%)}}
+.kicker{font-family:var(--mono);font-size:clamp(10px,1.1vw,13px);letter-spacing:.38em;text-transform:uppercase;color:var(--blue);margin-bottom:26px;text-shadow:0 0 20px color-mix(in srgb,var(--blue),transparent 45%)}
+.hero h1{font-family:var(--serif);font-size:clamp(58px,13vw,184px);font-weight:500;line-height:.76;letter-spacing:-.075em;text-wrap:balance;margin:0 auto 28px;max-width:10ch;text-shadow:0 0 80px rgba(255,255,255,.14)}
+.hero h1 span{display:block;background:linear-gradient(110deg,#fff 0%,var(--gold) 31%,#fff 48%,var(--blue) 70%,#fff 100%);background-size:220% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:titleLight 10s ease-in-out infinite}
+.hero h1 .thin{font-style:italic;opacity:.36;letter-spacing:-.11em;filter:blur(.2px)}
+@keyframes titleLight{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+.hero-copy{max-width:760px;margin:0 auto;color:var(--muted);font-size:clamp(16px,2vw,22px);line-height:1.75;text-wrap:balance}.hero-copy strong{color:var(--ink);font-weight:600}.hero-actions{margin-top:38px;display:flex;gap:14px;align-items:center;justify-content:center;flex-wrap:wrap}
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:15px 22px;border:1px solid rgba(255,255,255,.13);border-radius:999px;background:rgba(255,255,255,.05);color:var(--ink);font-family:var(--mono);font-size:12px;letter-spacing:.14em;text-transform:uppercase;overflow:hidden;transition:.25s ease;min-height:52px}.btn::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-120%);transition:.6s}.btn:hover::before{transform:translateX(120%)}.btn:hover{transform:translateY(-2px);border-color:rgba(246,211,122,.5);box-shadow:0 18px 50px rgba(246,211,122,.10)}.btn.primary{background:linear-gradient(135deg,rgba(246,211,122,.98),rgba(255,255,255,.85),rgba(134,231,255,.72));color:#070711;border-color:transparent}.btn.danger{background:linear-gradient(135deg,rgba(255,95,158,.18),rgba(138,106,255,.15));border-color:rgba(255,95,158,.28)}
+.hud-line{position:absolute;left:clamp(18px,4vw,68px);right:clamp(18px,4vw,68px);bottom:24px;display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center;color:var(--dim);font-family:var(--mono);font-size:10px;letter-spacing:.24em;text-transform:uppercase;pointer-events:none}.hud-line::before,.hud-line::after{content:"";height:1px;background:linear-gradient(90deg,transparent,var(--line),transparent)}.hud-line::after{transform:scaleX(-1)}
+.scroll-glyph{position:absolute;bottom:82px;left:50%;transform:translateX(-50%);width:32px;height:58px;border:1px solid rgba(255,255,255,.16);border-radius:999px;display:grid;place-items:start center;padding-top:8px;opacity:.7}.scroll-glyph i{display:block;width:4px;height:9px;border-radius:99px;background:var(--gold);animation:scrollDot 1.9s ease infinite}@keyframes scrollDot{0%{transform:translateY(0);opacity:0}25%{opacity:1}100%{transform:translateY(28px);opacity:0}}
+.panel{width:min(1180px,100%);margin:0 auto}.split{display:grid;grid-template-columns:minmax(0,.88fr) minmax(340px,1.12fr);gap:clamp(26px,5vw,80px);align-items:center}.label{font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--blue);margin-bottom:18px}.section-title{font-family:var(--serif);font-size:clamp(44px,8vw,110px);line-height:.88;letter-spacing:-.055em;font-weight:500;text-wrap:balance}.section-title em{font-style:italic;color:var(--gold)}.lead{font-size:clamp(16px,1.7vw,20px);color:var(--muted);line-height:1.85;margin-top:24px;max-width:680px}.lead strong{color:var(--ink);font-weight:600}.micro{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);line-height:2}.royal-card{contain:layout paint;position:relative;background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.028));border:1px solid rgba(246,211,122,.15);border-radius:32px;padding:clamp(22px,4vw,44px);box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.12);overflow:hidden;transform-style:preserve-3d}.royal-card::before{content:"";position:absolute;inset:-1px;background:radial-gradient(circle at var(--mx,50%) var(--my,50%),rgba(246,211,122,.18),transparent 42%);opacity:.9;pointer-events:none}.royal-card>*{position:relative;z-index:1}.portal-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.portal{position:relative;min-height:158px;padding:22px;border:1px solid rgba(255,255,255,.11);border-radius:26px;background:rgba(255,255,255,.04);text-align:left;overflow:hidden;transition:.25s ease}.portal::before{content:"";position:absolute;inset:auto 20px 20px auto;width:92px;height:92px;border:1px solid var(--line);border-radius:50%;box-shadow:inset 0 0 40px rgba(255,255,255,.04)}.portal:hover,.portal.active{transform:translateY(-4px);background:rgba(255,255,255,.075);border-color:rgba(246,211,122,.38)}.portal.active{box-shadow:0 20px 80px rgba(246,211,122,.09)}.portal h3{font-family:var(--serif);font-weight:500;font-size:28px;letter-spacing:-.03em;margin-bottom:8px}.portal p{color:var(--muted);font-size:14px;line-height:1.6}.portal code{display:inline-block;margin-bottom:12px;color:var(--gold);font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase}.artifact-stage{position:relative;min-height:540px;display:grid;place-items:center;perspective:1200px}.artifact{width:min(420px,72vw);aspect-ratio:1;position:relative;transform-style:preserve-3d;animation:artifactFloat 8s ease-in-out infinite}.artifact::before,.artifact::after{content:"";position:absolute;inset:10%;border:1px solid rgba(246,211,122,.22);border-radius:50%;box-shadow:0 0 75px rgba(246,211,122,.10),inset 0 0 60px rgba(134,231,255,.06);animation:spin 18s linear infinite}.artifact::after{inset:20%;border-color:rgba(134,231,255,.23);transform:rotateX(72deg);animation-duration:12s;animation-direction:reverse}.artifact-core{position:absolute;inset:32%;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,var(--gold) 22%,var(--violet) 54%,rgba(0,0,0,.1) 70%);box-shadow:0 0 90px var(--gold),0 0 160px rgba(134,231,255,.18);filter:saturate(1.25)}.artifact .ring{position:absolute;inset:7%;border:1px solid rgba(255,255,255,.13);border-radius:50%;transform:rotateX(78deg) rotateY(var(--ry,20deg));animation:spin 13s linear infinite}.artifact .ring.r2{inset:0;transform:rotateX(-62deg) rotateY(80deg);animation-duration:19s}.artifact .ring.r3{inset:17%;transform:rotateX(22deg) rotateY(122deg);animation-duration:23s}.artifact .needle{position:absolute;left:50%;top:0;width:1px;height:100%;background:linear-gradient(transparent,var(--gold),transparent);opacity:.45;transform:translateX(-50%) rotate(var(--a,0deg));filter:drop-shadow(0 0 10px var(--gold))}.artifact .needle.n2{--a:60deg}.artifact .needle.n3{--a:120deg}.artifact .needle.n4{--a:32deg;opacity:.22}.artifact .needle.n5{--a:148deg;opacity:.22}@keyframes artifactFloat{0%,100%{transform:rotateX(62deg) rotateZ(-12deg) translateY(0)}50%{transform:rotateX(54deg) rotateZ(14deg) translateY(-22px)}}@keyframes spin{to{transform:rotate(360deg)}}
+.chambers{display:grid;grid-template-columns:repeat(5,minmax(260px,1fr));gap:18px;overflow-x:auto;padding:34px max(18px,calc((100vw - 1180px)/2)) 28px;scroll-snap-type:x mandatory;scrollbar-width:none}.chambers::-webkit-scrollbar{display:none}.chamber{contain:layout paint;min-height:460px;scroll-snap-align:center;position:relative;border:1px solid rgba(255,255,255,.10);border-radius:34px;padding:28px;background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;transition:.35s ease}.chamber:hover{transform:translateY(-8px);border-color:rgba(246,211,122,.32);box-shadow:0 24px 80px rgba(0,0,0,.45)}.chamber::before{content:"";position:absolute;inset:-35% -35% auto auto;width:260px;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,var(--accent,var(--gold)),transparent 65%);opacity:.16;filter:blur(8px)}.chamber::after{content:"";position:absolute;inset:12px;border:1px solid rgba(255,255,255,.045);border-radius:26px;pointer-events:none}.chamber .num{font-family:var(--mono);font-size:11px;letter-spacing:.22em;color:var(--gold);text-transform:uppercase}.chamber h3{font-family:var(--serif);font-size:clamp(34px,3vw,48px);line-height:.94;letter-spacing:-.05em;font-weight:500;margin-top:18px}.chamber p{color:var(--muted);line-height:1.72;margin-top:16px}.mini-orbit{width:160px;height:160px;border:1px solid rgba(255,255,255,.13);border-radius:50%;align-self:flex-end;position:relative;margin-top:30px;animation:spin 18s linear infinite}.mini-orbit::before,.mini-orbit::after{content:"";position:absolute;border-radius:50%}.mini-orbit::before{inset:30%;background:radial-gradient(circle,#fff,var(--accent,var(--gold)),transparent 72%);box-shadow:0 0 40px var(--accent,var(--gold))}.mini-orbit::after{inset:10%;border:1px solid rgba(255,255,255,.12);transform:rotateX(68deg)}
+.ritual{display:grid;grid-template-columns:1fr 1fr;gap:22px;align-items:stretch}.ritual-text{display:flex;flex-direction:column;justify-content:space-between;min-height:420px}.quote-box{font-family:var(--serif);font-size:clamp(30px,4vw,60px);line-height:1.02;letter-spacing:-.04em;text-wrap:balance}.quote-box .mark{color:var(--gold)}.dial{display:grid;gap:14px;margin-top:28px}.dial label{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--dim)}input[type="range"]{width:100%;appearance:none;background:transparent}input[type="range"]::-webkit-slider-runnable-track{height:2px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--blue),var(--green));border-radius:99px}input[type="range"]::-webkit-slider-thumb{appearance:none;width:22px;height:22px;margin-top:-10px;border-radius:50%;background:#fff;border:2px solid var(--gold);box-shadow:0 0 28px var(--gold)}input[type="range"]::-moz-range-track{height:2px;background:linear-gradient(90deg,var(--rose),var(--gold),var(--blue),var(--green));border-radius:99px}input[type="range"]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--gold);box-shadow:0 0 28px var(--gold)}.oracle{display:flex;flex-direction:column;gap:16px}.oracle-input{min-height:130px;border:1px solid rgba(255,255,255,.1);border-radius:26px;background:rgba(0,0,0,.18);padding:22px;resize:vertical;outline:none;color:var(--ink)}.oracle-input:focus{border-color:rgba(246,211,122,.42);box-shadow:0 0 0 4px rgba(246,211,122,.05)}.oracle-output{min-height:178px;border:1px solid rgba(134,231,255,.16);border-radius:26px;padding:24px;background:radial-gradient(circle at 50% 0,rgba(134,231,255,.09),rgba(255,255,255,.03));font-family:var(--serif);font-size:26px;line-height:1.26;letter-spacing:-.02em;display:flex;align-items:center;color:var(--ink)}
+.timeline{position:relative;margin-top:48px}.timeline::before{content:"";position:absolute;left:calc(50% - .5px);top:0;bottom:0;width:1px;background:linear-gradient(transparent,var(--line),transparent)}.era{display:grid;grid-template-columns:1fr 1fr;gap:46px;padding:34px 0;align-items:center}.era:nth-child(even) .era-copy{grid-column:2}.era:nth-child(even) .era-sigil{grid-column:1;grid-row:1}.era-copy{padding:30px;border:1px solid rgba(255,255,255,.08);border-radius:28px;background:rgba(255,255,255,.035)}.era-year{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}.era h3{font-family:var(--serif);font-size:34px;line-height:1.02;font-weight:500;letter-spacing:-.035em}.era p{margin-top:12px;color:var(--muted)}.era-sigil{display:grid;place-items:center}.sigil{width:190px;aspect-ratio:1;border:1px solid var(--line);border-radius:50%;position:relative;box-shadow:inset 0 0 50px rgba(246,211,122,.05);animation:spin 30s linear infinite}.sigil::before,.sigil::after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.12);inset:18%;transform:scaleX(1.5) rotate(35deg)}.sigil::after{inset:33%;background:radial-gradient(circle,#fff,var(--gold),transparent 70%);box-shadow:0 0 40px var(--gold);border:0;transform:none}
+.footer-cathedral{min-height:86vh;display:grid;place-items:center;text-align:center}.final-seal{position:relative;width:min(760px,100%);padding:clamp(34px,6vw,68px);border-radius:44px;border:1px solid rgba(246,211,122,.18);background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.025));box-shadow:var(--shadow);overflow:hidden}.final-seal::before{content:"";position:absolute;inset:-40%;background:conic-gradient(from 180deg,transparent,var(--gold),transparent,var(--blue),transparent);opacity:.18;animation:spin 11s linear infinite}.final-seal>*{position:relative}.final-seal h2{font-family:var(--serif);font-size:clamp(44px,8vw,110px);line-height:.83;letter-spacing:-.06em;font-weight:500}.final-seal p{max-width:560px;margin:22px auto 0;color:var(--muted);font-size:18px;line-height:1.8}.device-dock{position:fixed;z-index:45;left:50%;bottom:18px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;padding:8px;border:1px solid rgba(255,255,255,.1);border-radius:999px;background:rgba(2,3,10,.58);backdrop-filter:blur(18px);box-shadow:0 20px 80px rgba(0,0,0,.45)}.device-dock button{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);padding:9px 12px;border-radius:99px;border:1px solid transparent}.device-dock button.active{color:#08070c;background:var(--gold)}.toast{position:fixed;z-index:80;right:20px;bottom:86px;max-width:360px;padding:18px 20px;border:1px solid rgba(246,211,122,.22);border-radius:24px;background:rgba(5,5,12,.82);backdrop-filter:blur(20px);box-shadow:var(--shadow);transform:translateY(30px);opacity:0;pointer-events:none;transition:.35s ease;color:var(--muted);font-size:14px}.toast.show{opacity:1;transform:none}.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease,transform .8s ease}.reveal.visible{opacity:1;transform:none}.fracture{animation:fracture .68s ease}@keyframes fracture{0%,100%{filter:none;transform:none}16%{filter:hue-rotate(90deg) contrast(1.8);transform:skewX(3deg) scale(1.01)}32%{filter:invert(.05) saturate(2);transform:translateX(-8px)}50%{filter:blur(1px) contrast(1.4);transform:translateX(6px) skewY(-1deg)}70%{filter:hue-rotate(-60deg);transform:translateY(-4px)}}
+.tv-only,.mobile-only{display:none}
+@media (min-width:1800px), (min-aspect-ratio: 21/9){:root{--nav-h:92px}.section{padding-left:7vw;padding-right:7vw}.hero-shell{width:min(1500px,92vw)}.hero h1{font-size:clamp(120px,10vw,230px)}.hero-copy{font-size:24px}.split{grid-template-columns:1fr 1fr}.chambers{grid-template-columns:repeat(5,minmax(360px,1fr));padding-left:7vw;padding-right:7vw}.chamber{min-height:560px}.tv-only{display:initial}.device-dock{left:auto;right:34px;transform:none;bottom:34px}.hud-line{bottom:40px;font-size:12px}.nav-center a{font-size:12px;padding:12px 17px}.section-title{font-size:clamp(80px,6.5vw,150px)}}
+@media (max-width:900px){:root{--nav-h:64px;--section-pad:84px}nav{grid-template-columns:1fr auto;padding:0 16px}.nav-center,.nav-right .icon-btn:not(.mobile-menu-btn){display:none}.mobile-menu-btn{display:grid}.brand{font-size:10px;letter-spacing:.18em}.brand-mark{width:32px;height:32px}.section{padding-left:18px;padding-right:18px}.hero{padding-top:calc(var(--nav-h) + 18px)}.hero-shell{padding:32px 20px;border-radius:32px}.hero h1{font-size:clamp(52px,18vw,96px);letter-spacing:-.08em}.hero-copy{font-size:15px;line-height:1.7}.hero-actions{gap:10px}.btn{width:100%;padding:14px 16px}.hud-line{display:none}.scroll-glyph{display:none}.split,.ritual,.era{grid-template-columns:1fr}.artifact-stage{min-height:390px}.portal-grid{grid-template-columns:1fr}.chambers{grid-template-columns:repeat(5,82vw);padding-left:18px;padding-right:18px}.chamber{min-height:430px}.timeline::before{left:18px}.era{gap:18px;padding-left:38px}.era:nth-child(even) .era-copy,.era:nth-child(even) .era-sigil{grid-column:auto;grid-row:auto}.era-sigil{display:none}.device-dock{width:calc(100vw - 24px);bottom:12px;justify-content:space-between;overflow:auto;border-radius:22px}.device-dock button{white-space:nowrap}.mobile-only{display:initial}.toast{left:12px;right:12px;bottom:78px}.section-title{font-size:clamp(44px,14vw,76px)}.royal-card{border-radius:26px;padding:22px}.quote-box{font-size:34px}.oracle-output{font-size:22px}.crown-orbit.o2,.crown-orbit.o3{display:none}}
+@media (max-width:480px){.hero-shell::after{inset:8px}.kicker{letter-spacing:.22em}.portal{min-height:145px}.chambers{grid-template-columns:repeat(5,88vw)}.final-seal{border-radius:30px}.artifact{width:78vw}.oracle-input{min-height:110px}}
+@media (prefers-reduced-motion: reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}#cosmic-canvas{opacity:.55}}
+</style>
+<!-- Extreme optimization pass: DPR capped, cached canvas background, precomputed grid links, reduced draw counts, FPS cap, static grain, tab pause. -->
+</head>
+<body data-phase="crown" data-device="pc">
+<a class="skip" href="#main">Skip to content</a>
+<canvas id="cosmic-canvas" aria-hidden="true"></canvas>
+<div id="grain" aria-hidden="true"></div>
+<nav aria-label="Primary navigation">
+  <a class="brand" href="#top" aria-label="Cathedral of Becoming home"><span class="brand-mark">✦</span><span>CATHEDRAL<br class="mobile-only"> OF BECOMING</span></a>
+  <div class="nav-center" aria-label="Page sections">
+    <a href="#architectures">Architectures</a>
+    <a href="#chambers">Chambers</a>
+    <a href="#oracle">Oracle</a>
+    <a href="#timeline">Timeline</a>
+  </div>
+  <div class="nav-right">
+    <button class="icon-btn" id="btn-fracture" title="Fracture reality"><span>F</span></button>
+    <button class="icon-btn" id="btn-sound" title="Toggle ceremonial pulse"><span>◌</span></button>
+    <button class="icon-btn mobile-menu-btn" id="btn-menu" title="Open menu"><span>☰</span></button>
+  </div>
+</nav>
+<main id="main">
+  <section id="top" class="section hero" aria-labelledby="hero-title">
+    <div class="crown-orbit o1"></div><div class="crown-orbit o2"></div><div class="crown-orbit o3"></div>
+    <div class="hero-shell reveal">
+      <p class="kicker">A royal machine for remembering the scale of being alive</p>
+      <h1 id="hero-title"><span>The Crown</span><span class="thin">Inside</span><span>The Void</span></h1>
+      <p class="hero-copy">This is not a normal space website. It is a <strong>living interstellar cathedral</strong>: anomaly, singularity, nebula, cosmos, and quantum forest fused into one responsive experience that changes its behavior for PC, mobile, and TV.</p>
+      <div class="hero-actions">
+        <a class="btn primary" href="#architectures">Enter the Cathedral</a>
+        <button class="btn danger" id="btn-collapse">Collapse Spacetime</button>
+      </div>
+    </div>
+    <div class="scroll-glyph" aria-hidden="true"><i></i></div>
+    <div class="hud-line"><span id="mode-readout">DEVICE: PC // CURSOR GRAVITY ONLINE</span></div>
+  </section>
+
+  <section id="architectures" class="section" aria-labelledby="arch-title">
+    <div class="panel split">
+      <div class="reveal">
+        <p class="label">01 — Source architectures absorbed</p>
+        <h2 id="arch-title" class="section-title">Five pages became <em>one throne.</em></h2>
+        <p class="lead">Each uploaded HTML file becomes a chamber instead of a separate page: the anomaly becomes a vortex crown, the singularity becomes a gravity loom, the nebula becomes living dust, the cosmos page becomes the archive, and Lumina becomes the bioluminescent forest beneath the stars.</p>
+        <p class="micro" style="margin-top:28px">Keys: 1–6 phase shift · F fracture · T TV mode · M mobile mode · P PC mode · click/tap to collapse</p>
+      </div>
+      <div class="royal-card reveal artifact-stage" id="artifact-card">
+        <div class="artifact" aria-hidden="true">
+          <div class="artifact-core"></div><div class="ring r1"></div><div class="ring r2"></div><div class="ring r3"></div>
+          <i class="needle n1"></i><i class="needle n2"></i><i class="needle n3"></i><i class="needle n4"></i><i class="needle n5"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="portal-title">
+    <div class="panel split">
+      <div class="royal-card reveal">
+        <div class="portal-grid" id="portal-grid">
+          <button class="portal" data-phase="anomaly"><code>01 / Anomaly</code><h3>Quantum Crown</h3><p>A 3D hyperobject language pulled from the uploaded anomaly page and rebuilt as a royal celestial machine.</p></button>
+          <button class="portal" data-phase="singularity"><code>02 / Singularity</code><h3>Gravity Loom</h3><p>A black-hole mesh that bends around the cursor, designed like spacetime being woven by a king.</p></button>
+          <button class="portal" data-phase="nebula"><code>03 / Nebula</code><h3>Dust Cathedral</h3><p>Particle fields, shockwaves, and luminous cosmic fog remade into ceremonial architecture.</p></button>
+          <button class="portal" data-phase="cosmos"><code>04 / Cosmos</code><h3>Archive Horizon</h3><p>The scrollable cosmos site becomes a navigable archive of human scale, mission, and memory.</p></button>
+          <button class="portal" data-phase="lumina"><code>05 / Lumina</code><h3>Quantum Forest</h3><p>The forest concept becomes a bioluminescent underworld: spores, roots, and living light.</p></button>
+          <button class="portal active" data-phase="crown"><code>06 / Crown</code><h3>Royal Synthesis</h3><p>The final mode: all systems fused into a single Interstellar-like ceremonial interface.</p></button>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="label">02 — Change the laws</p>
+        <h2 id="portal-title" class="section-title">The website should feel <em>alive.</em></h2>
+        <p class="lead">Tap any law. The canvas, colors, copy, and motion respond. On PC, the cursor acts like a gravity mass. On mobile, touch creates ripples. On TV, the page turns into an autonomous cinematic installation.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="chambers" class="section" aria-labelledby="chambers-title">
+    <div class="panel reveal" style="margin-bottom:22px">
+      <p class="label">03 — The five chambers</p>
+      <h2 id="chambers-title" class="section-title">Not sections. <em>Relics.</em></h2>
+      <p class="lead">These are the original uploaded ideas reinterpreted as a single luxury cosmic system.</p>
+    </div>
+    <div class="chambers" id="chamber-strip" aria-label="Horizontal chamber gallery">
+      <article class="chamber reveal" style="--accent:var(--rose)"><div><p class="num">Anomaly.00</p><h3>The Hyperobject</h3><p>A ringed 3D structure that shatters and reforms, now upgraded from tech-demo to mythic royal machinery.</p></div><div class="mini-orbit"></div></article>
+      <article class="chamber reveal" style="--accent:var(--blue)"><div><p class="num">Singularity.01</p><h3>The Bent Grid</h3><p>Spacetime is not a background here. It is a fabric that bends, breathes, collapses, and returns.</p></div><div class="mini-orbit"></div></article>
+      <article class="chamber reveal" style="--accent:var(--violet)"><div><p class="num">Nebula.02</p><h3>The Living Dust</h3><p>Thousands of particles behave like a cosmic organism around the visitor’s hand.</p></div><div class="mini-orbit"></div></article>
+      <article class="chamber reveal" style="--accent:var(--gold)"><div><p class="num">Cosmos.03</p><h3>The Great Archive</h3><p>A scroll journey about distance, age, planets, and human reach, translated into a ceremonial atlas.</p></div><div class="mini-orbit"></div></article>
+      <article class="chamber reveal" style="--accent:var(--green)"><div><p class="num">Lumina.04</p><h3>The Forest Below</h3><p>Bioluminescence, crystal roots, and rising spores become the softer, stranger life inside the void.</p></div><div class="mini-orbit"></div></article>
+    </div>
+  </section>
+
+  <section id="oracle" class="section" aria-labelledby="oracle-title">
+    <div class="panel ritual">
+      <div class="royal-card ritual-text reveal">
+        <div>
+          <p class="label">04 — Perception engine</p>
+          <h2 id="oracle-title" class="section-title">A page that argues with your fear.</h2>
+        </div>
+        <div>
+          <p class="quote-box" id="quote-box"><span class="mark">“</span>You are not small. You are early in the act of becoming large.<span class="mark">”</span></p>
+          <div class="dial">
+            <label for="perception">Shift perception</label>
+            <input id="perception" type="range" min="0" max="4" value="2" />
+          </div>
+        </div>
+      </div>
+      <div class="royal-card oracle reveal">
+        <p class="label">Type one private sentence</p>
+        <textarea id="oracle-input" class="oracle-input" placeholder="Example: I am scared I am wasting my life."></textarea>
+        <button class="btn primary" id="oracle-btn">Turn it into a constellation</button>
+        <div class="oracle-output" id="oracle-output">Your sentence will return as a royal cosmic verdict.</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="timeline" class="section" aria-labelledby="timeline-title">
+    <div class="panel reveal">
+      <p class="label">05 — Human scale</p>
+      <h2 id="timeline-title" class="section-title">The universe is old. <em>You are still in the opening shot.</em></h2>
+      <p class="lead">A mind-bending site should not only look expensive. It should make the viewer feel time differently.</p>
+      <div class="timeline">
+        <article class="era"><div class="era-copy"><p class="era-year">13.8 billion years ago</p><h3>The dark became measurable.</h3><p>Cosmic time begins its long sentence. Everything human will eventually appear inside one microscopic clause.</p></div><div class="era-sigil"><div class="sigil"></div></div></article>
+        <article class="era"><div class="era-copy"><p class="era-year">4.5 billion years ago</p><h3>A planet cooled enough to remember rain.</h3><p>Rock, ocean, atmosphere, accident, chemistry. The stage was built before any actor knew how to stand.</p></div><div class="era-sigil"><div class="sigil"></div></div></article>
+        <article class="era"><div class="era-copy"><p class="era-year">Now</p><h3>A visitor opens a webpage.</h3><p>For a few seconds, glass, light, electricity, code, and thought agree to become one experience.</p></div><div class="era-sigil"><div class="sigil"></div></div></article>
+        <article class="era"><div class="era-copy"><p class="era-year">Next</p><h3>The page ends. The pressure remains.</h3><p>The point is not to stare at the sky. The point is to return to Earth less willing to waste the day.</p></div><div class="era-sigil"><div class="sigil"></div></div></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section footer-cathedral" aria-labelledby="final-title">
+    <div class="final-seal reveal">
+      <p class="label">Final transmission</p>
+      <h2 id="final-title">Build as if the void is watching.</h2>
+      <p>This version is intentionally excessive: cinematic, responsive, interactive, and self-contained. It is a website as a ritual object.</p>
+      <div class="hero-actions"><button class="btn primary" id="btn-ascend">Ascend Again</button><button class="btn" id="btn-tv">Force TV Installation</button></div>
+    </div>
+  </section>
+</main>
+<div class="device-dock" aria-label="Device preview controls">
+  <button data-device="pc" class="active">PC</button>
+  <button data-device="mobile">Mobile</button>
+  <button data-device="tv">TV</button>
+  <button data-device="auto">Auto</button>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite">System message</div>
+<script>
+(() => {
+'use strict';
+const body = document.body;
+const canvas = document.getElementById('cosmic-canvas');
+const ctx = canvas.getContext('2d', { alpha: false });
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const PERF = { targetFPS: 50, maxDPR: 1.15, maxDPRMobile: 1, maxDPRTV: 1.05, shockLimit: 4 };
+let W = 0, H = 0, DPR = 1, mode = 'pc', forcedMode = null, phase = 'crown', tick = 0, pointerActive = false;
+let pointer = { x: 0, y: 0, px: 0, py: 0, down: false };
+let stars = [], particles = [], grid = [], gridLinks = [], vortex = [], spores = [], shocks = [];
+let cfg = null, bgCanvas = document.createElement('canvas'), bgCtx = bgCanvas.getContext('2d', { alpha:false });
+let lastFrame = 0, frameInterval = 1000 / PERF.targetFPS, paused = document.hidden;
+let audio = { ctx: null, osc: null, gain: null, on: false };
+const phases = ['anomaly','singularity','nebula','cosmos','lumina','crown'];
+const phaseText = {
+  anomaly:'ANOMALY: vortex crown calibrated. Click to fracture the hyperobject.',
+  singularity:'SINGULARITY: gravity loom online. Move slowly; the mesh will confess.',
+  nebula:'NEBULA: dust cathedral awake. The void is behaving like weather.',
+  cosmos:'COSMOS: archive horizon open. Scroll as if reading a royal star map.',
+  lumina:'LUMINA: quantum forest breathing. Spores rising beneath the crown.',
+  crown:'CROWN: all chambers fused. Royal synthesis active.'
+};
+function clamp(v,a,b){ return Math.max(a, Math.min(b, v)); }
+function rand(a,b){ return a + Math.random() * (b - a); }
+function setToast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('show'); clearTimeout(setToast.timer); setToast.timer = setTimeout(()=>t.classList.remove('show'), 3300); }
+function detectMode(){ if(forcedMode && forcedMode !== 'auto') return forcedMode; if(innerWidth < 760) return 'mobile'; if(innerWidth >= 1800 || innerWidth / Math.max(innerHeight,1) > 2.25) return 'tv'; return 'pc'; }
+function applyMode(next){ mode = next === 'auto' ? detectMode() : next; body.dataset.device = mode; document.querySelectorAll('.device-dock button').forEach(b => b.classList.toggle('active', b.dataset.device === (forcedMode || 'auto') || (!forcedMode && b.dataset.device === 'auto'))); const read = document.getElementById('mode-readout'); if(read){ const copy = mode === 'tv' ? 'DEVICE: TV // AUTONOMOUS CINEMATIC INSTALLATION' : mode === 'mobile' ? 'DEVICE: MOBILE // TOUCH RIPPLE INTERFACE' : 'DEVICE: PC // CURSOR GRAVITY ONLINE'; read.textContent = copy; } }
+function setPhase(next){ if(!phases.includes(next)) return; phase = next; body.dataset.phase = next; document.querySelectorAll('.portal').forEach(p => p.classList.toggle('active', p.dataset.phase === next)); setToast(phaseText[next]); }
+function resize(){ applyMode(detectMode()); const dprCap = mode === 'mobile' ? PERF.maxDPRMobile : mode === 'tv' ? PERF.maxDPRTV : PERF.maxDPR; DPR = Math.min(devicePixelRatio || 1, dprCap); W = Math.floor(innerWidth * DPR); H = Math.floor(innerHeight * DPR); canvas.width = W; canvas.height = H; canvas.style.width = innerWidth + 'px'; canvas.style.height = innerHeight + 'px'; ctx.setTransform(DPR,0,0,DPR,0,0); bgCanvas.width = W; bgCanvas.height = H; bgCtx.setTransform(DPR,0,0,DPR,0,0); cacheBackground(); seedWorld(); }
+function counts(){ if(mode === 'mobile') return { stars:90, particles:150, gridStep:58, rings:14, perRing:18, spores:22 }; if(mode === 'tv') return { stars:220, particles:420, gridStep:82, rings:30, perRing:28, spores:54 }; return { stars:150, particles:300, gridStep:58, rings:24, perRing:24, spores:34 }; }
+function seedWorld(){ cfg = counts(); const c = cfg; stars = Array.from({length:c.stars}, () => ({ x:rand(0,innerWidth), y:rand(0,innerHeight), z:rand(.18,1), r:rand(.35,1.55), tw:rand(0,Math.PI*2) })); particles = Array.from({length:c.particles}, () => ({ x:rand(0,innerWidth), y:rand(0,innerHeight), bx:rand(0,innerWidth), by:rand(0,innerHeight), vx:0, vy:0, r:rand(.45,2.0), a:rand(.18,.85), hue:rand(0,1) })); grid = []; gridLinks = []; const cols = Math.ceil((innerWidth + c.gridStep*2)/c.gridStep) + 1; const rows = Math.ceil((innerHeight + c.gridStep*2)/c.gridStep) + 1; for(let ix=0; ix<cols; ix++){ for(let iy=0; iy<rows; iy++){ const x = -c.gridStep + ix*c.gridStep, y = -c.gridStep + iy*c.gridStep; grid.push({ x, y, bx:x, by:y, vx:0, vy:0, ix, iy }); } } const at = (ix,iy) => (ix>=0 && iy>=0 && ix<cols && iy<rows) ? grid[ix*rows+iy] : null; for(let ix=0; ix<cols; ix++){ for(let iy=0; iy<rows; iy++){ const gp = at(ix,iy), right = at(ix+1,iy), down = at(ix,iy+1); if(right) gridLinks.push([gp,right]); if(down) gridLinks.push([gp,down]); } } vortex = []; for(let r=0; r<c.rings; r++){ const z = (r - c.rings/2) * 28; const radius = 110 + Math.sin(r*.34) * 36 + r * (mode === 'tv' ? 2.4 : 1.5); for(let j=0; j<c.perRing; j++){ const a = j / c.perRing * Math.PI * 2; vortex.push({ bx:Math.cos(a)*radius, by:Math.sin(a)*radius, bz:z, x:Math.cos(a)*radius, y:Math.sin(a)*radius, z, vx:0, vy:0, vz:0, ring:r, idx:j }); } } spores = Array.from({length:c.spores}, () => ({ x:rand(0,innerWidth), y:rand(innerHeight, innerHeight*2), s:rand(1,3.3), vy:rand(.25,1.05), drift:rand(-.45,.45), life:rand(0,1) })); }
+function paletteAlpha(alpha){ const styles = getComputedStyle(body); return { gold: styles.getPropertyValue('--gold').trim(), blue: styles.getPropertyValue('--blue').trim(), violet: styles.getPropertyValue('--violet').trim(), rose: styles.getPropertyValue('--rose').trim(), green: styles.getPropertyValue('--green').trim(), a: alpha }; }
+function cacheBackground(){ const g = bgCtx.createRadialGradient(innerWidth*.5, innerHeight*.44, 0, innerWidth*.5, innerHeight*.44, Math.max(innerWidth,innerHeight)*.82); g.addColorStop(0,'#0d0a20'); g.addColorStop(.36,'#050613'); g.addColorStop(1,'#010208'); bgCtx.fillStyle = g; bgCtx.fillRect(0,0,innerWidth,innerHeight); const aur = bgCtx.createLinearGradient(0,0,innerWidth,innerHeight); aur.addColorStop(0, 'rgba(134,231,255,.06)'); aur.addColorStop(.45, 'rgba(246,211,122,.045)'); aur.addColorStop(1, 'rgba(255,95,158,.055)'); bgCtx.fillStyle = aur; bgCtx.fillRect(0,0,innerWidth,innerHeight); }
+function drawBackground(){ ctx.drawImage(bgCanvas,0,0,innerWidth,innerHeight); }
+function drawStars(){ ctx.save(); for(const s of stars){ const drift = tick * (0.04 + s.z * .03); let x = (s.x + Math.sin(drift + s.tw) * 12 * s.z) % innerWidth; let y = (s.y + Math.cos(drift*.7 + s.tw) * 8 * s.z) % innerHeight; const a = .28 + Math.sin(tick*.04 + s.tw) * .22 + s.z*.3; ctx.fillStyle = `rgba(255,248,220,${clamp(a,0,.9)})`; ctx.beginPath(); ctx.arc(x,y,s.r*s.z,0,Math.PI*2); ctx.fill(); } ctx.restore(); }
+function drawGrid(){ if(phase !== 'singularity' && phase !== 'crown') return; const step = cfg.gridStep; const p = mode === 'tv' ? { x:innerWidth/2 + Math.sin(tick*.012)*innerWidth*.25, y:innerHeight/2 + Math.cos(tick*.009)*innerHeight*.25 } : pointer; for(const gp of grid){ const dx = gp.x - p.x, dy = gp.y - p.y, d = Math.hypot(dx,dy) || 1; let tx = gp.bx + Math.sin(tick*.018 + gp.by*.013) * 8; let ty = gp.by + Math.cos(tick*.016 + gp.bx*.013) * 8; const radius = phase === 'crown' ? 180 : 260; if(pointerActive || mode === 'tv' || phase === 'singularity'){ if(d < radius){ const f = (radius - d)/radius; const pull = phase === 'singularity' ? -90 : -42; tx += (dx/d) * f * pull; ty += (dy/d) * f * pull; } } for(const sh of shocks){ const sd = Math.hypot(gp.x-sh.x,gp.y-sh.y) || 1; const ring = Math.abs(sd - sh.r); if(ring < 70){ const f = (70-ring)/70 * sh.power; tx += (dx/d) * f * 46; ty += (dy/d) * f * 46; } } gp.vx += (tx - gp.x) * .06; gp.vy += (ty - gp.y) * .06; gp.vx *= .82; gp.vy *= .82; gp.x += gp.vx; gp.y += gp.vy; }
+ ctx.save(); ctx.lineWidth = 1; ctx.strokeStyle = phase === 'singularity' ? 'rgba(0,255,204,.18)' : 'rgba(246,211,122,.13)'; ctx.beginPath(); for(const link of gridLinks){ const a = link[0], b = link[1]; ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y); } ctx.stroke(); ctx.restore(); }
+function project3d(x,y,z,rx,ry){ const cy = Math.cos(ry), sy = Math.sin(ry), cx = Math.cos(rx), sx = Math.sin(rx); let x1 = x*cy + z*sy; let z1 = -x*sy + z*cy; let y1 = y*cx - z1*sx; let z2 = y*sx + z1*cx; const focal = mode === 'mobile' ? 340 : mode === 'tv' ? 620 : 500; const scale = focal / (focal + z2 + 350); return { x: innerWidth/2 + x1*scale, y: innerHeight/2 + y1*scale, s: scale, z:z2 }; }
+function drawVortex(){ if(!['anomaly','crown','cosmos'].includes(phase)) return; const ry = mode === 'tv' ? Math.sin(tick*.008)*1.35 : (pointer.x/innerWidth - .5) * 1.1 + Math.sin(tick*.004)*.25; const rx = mode === 'mobile' ? Math.sin(tick*.01)*.55 : (pointer.y/innerHeight - .5) * -.72 + Math.cos(tick*.005)*.22; const projected = []; for(const n of vortex){ const wave = Math.sin(tick*.035 + n.bz*.04) * (phase === 'anomaly' ? 24 : 13); const tx = n.bx + n.bx/130 * wave; const ty = n.by + n.by/130 * wave; const tz = n.bz + Math.cos(tick*.025 + n.ring*.12) * 20; n.vx += (tx - n.x) * .035; n.vy += (ty - n.y) * .035; n.vz += (tz - n.z) * .035; n.vx *= .88; n.vy *= .88; n.vz *= .88; n.x += n.vx; n.y += n.vy; n.z += n.vz; projected.push(project3d(n.x,n.y,n.z,rx,ry)); }
+ const per = cfg.perRing; ctx.save(); ctx.globalCompositeOperation = 'lighter'; for(let i=0;i<projected.length;i+=per){ ctx.beginPath(); for(let j=0;j<per;j++){ const pt = projected[i+j]; if(j===0) ctx.moveTo(pt.x,pt.y); else ctx.lineTo(pt.x,pt.y); } ctx.closePath(); const alpha = phase === 'anomaly' ? .16 : .08; ctx.strokeStyle = `rgba(246,211,122,${alpha})`; ctx.lineWidth = 1; ctx.stroke(); }
+ for(const pt of projected){ const a = clamp((pt.s - .38) * 1.6, .05, .65); ctx.fillStyle = phase === 'anomaly' ? `rgba(255,75,128,${a})` : `rgba(246,211,122,${a})`; ctx.beginPath(); ctx.arc(pt.x,pt.y,Math.max(.5,pt.s*2.2),0,Math.PI*2); ctx.fill(); }
+ ctx.restore(); }
+function drawNebula(){ if(!['nebula','crown','lumina'].includes(phase)) return; const p = mode === 'tv' ? { x:innerWidth*.5 + Math.sin(tick*.01)*innerWidth*.22, y:innerHeight*.5 + Math.cos(tick*.013)*innerHeight*.18 } : pointer; ctx.save(); ctx.globalCompositeOperation = 'lighter'; for(const q of particles){ let tx = q.bx + Math.sin(tick*.012 + q.by*.008) * 24; let ty = q.by + Math.cos(tick*.014 + q.bx*.008) * 24; const dx = q.x - p.x, dy = q.y - p.y, d = Math.hypot(dx,dy) || 1; if(pointerActive || mode === 'tv'){ const radius = mode === 'mobile' ? 132 : 220; if(d < radius){ const f = (radius - d)/radius; const dir = phase === 'nebula' ? 1 : -0.35; tx += (dx/d) * f * 78 * dir; ty += (dy/d) * f * 78 * dir; } } for(const sh of shocks){ const sd = Math.hypot(q.x-sh.x,q.y-sh.y) || 1; if(sd < sh.r + 95 && sd > sh.r - 95){ const f = (1 - Math.abs(sd-sh.r)/95) * sh.power; q.vx += ((q.x - sh.x)/sd) * f * 6; q.vy += ((q.y - sh.y)/sd) * f * 6; } }
+ q.vx += (tx - q.x) * .015; q.vy += (ty - q.y) * .015; q.vx *= .91; q.vy *= .91; q.x += q.vx; q.y += q.vy; const hue = phase === 'lumina' ? 165 + q.hue*110 : phase === 'nebula' ? 270 + q.hue*95 : 38 + q.hue*190; ctx.fillStyle = `hsla(${hue}, 95%, 68%, ${q.a*.55})`; ctx.beginPath(); ctx.arc(q.x,q.y,q.r,0,Math.PI*2); ctx.fill(); } ctx.restore(); }
+function drawSpores(){ if(!['lumina','crown'].includes(phase)) return; ctx.save(); ctx.globalCompositeOperation = 'lighter'; for(const sp of spores){ sp.y -= sp.vy * (mode === 'tv' ? 1.35 : 1); sp.x += Math.sin(tick*.025 + sp.life*10) * .32 + sp.drift; if(sp.y < -20){ sp.y = innerHeight + rand(20,220); sp.x = rand(0,innerWidth); } const a = clamp((innerHeight - sp.y) / innerHeight, .08, .85); ctx.fillStyle = `rgba(132,255,197,${a*.11})`; ctx.beginPath(); ctx.arc(sp.x,sp.y,sp.s*3.1,0,Math.PI*2); ctx.fill(); ctx.fillStyle = `rgba(132,255,197,${a*.48})`; ctx.beginPath(); ctx.arc(sp.x,sp.y,sp.s,0,Math.PI*2); ctx.fill(); } ctx.restore(); }
+function drawBlackHole(){ if(!['singularity','crown'].includes(phase)) return; const cx = mode === 'tv' ? innerWidth/2 + Math.sin(tick*.006)*innerWidth*.12 : innerWidth/2; const cy = mode === 'tv' ? innerHeight/2 + Math.cos(tick*.005)*innerHeight*.10 : innerHeight/2; ctx.save(); ctx.globalCompositeOperation = 'lighter'; for(let i=0;i<5;i++){ ctx.beginPath(); ctx.ellipse(cx,cy,120+i*30,32+i*9, tick*.01 + i*.2,0,Math.PI*2); ctx.strokeStyle = `rgba(246,211,122,${.20-i*.028})`; ctx.lineWidth = 1.2; ctx.stroke(); } const rg = ctx.createRadialGradient(cx,cy,5,cx,cy,180); rg.addColorStop(0,'rgba(0,0,0,1)'); rg.addColorStop(.35,'rgba(0,0,0,.95)'); rg.addColorStop(.46,'rgba(255,255,255,.10)'); rg.addColorStop(.56,'rgba(246,211,122,.16)'); rg.addColorStop(1,'rgba(0,0,0,0)'); ctx.fillStyle = rg; ctx.beginPath(); ctx.arc(cx,cy,180,0,Math.PI*2); ctx.fill(); ctx.restore(); }
+function drawShocks(){ shocks = shocks.filter(s => s.power > .01); ctx.save(); ctx.globalCompositeOperation = 'lighter'; for(const s of shocks){ s.r += s.speed; s.power *= .94; ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.strokeStyle = `rgba(246,211,122,${s.power*.36})`; ctx.lineWidth = 2; ctx.stroke(); ctx.beginPath(); ctx.arc(s.x,s.y,s.r*.64,0,Math.PI*2); ctx.strokeStyle = `rgba(134,231,255,${s.power*.20})`; ctx.stroke(); } ctx.restore(); }
+function animate(now=0){ if(reduceMotion) return; if(paused){ requestAnimationFrame(animate); return; } if(now - lastFrame < frameInterval){ requestAnimationFrame(animate); return; } lastFrame = now - ((now - lastFrame) % frameInterval); tick++; drawBackground(); drawStars(); drawGrid(); drawNebula(); drawVortex(); drawBlackHole(); drawSpores(); drawShocks(); requestAnimationFrame(animate); }
+function collapse(x = innerWidth/2, y = innerHeight/2){ shocks.push({ x, y, r:6, power:1, speed: mode === 'mobile' ? 10 : 16 }); if(shocks.length > PERF.shockLimit) shocks.shift(); for(let i=0;i<vortex.length;i+=2){ const n = vortex[i]; n.vx += rand(-20,20); n.vy += rand(-20,20); n.vz += rand(-20,20); } body.classList.remove('fracture'); void body.offsetWidth; body.classList.add('fracture'); setToast('Spacetime collapse detected. The cathedral will reform.'); }
+function pointerMove(e){ const t = e.touches ? e.touches[0] : e; pointer.px = pointer.x; pointer.py = pointer.y; pointer.x = t.clientX; pointer.y = t.clientY; pointerActive = true; const card = e.target.closest && e.target.closest('.royal-card'); if(card){ const r = card.getBoundingClientRect(); card.style.setProperty('--mx', `${((pointer.x-r.left)/r.width)*100}%`); card.style.setProperty('--my', `${((pointer.y-r.top)/r.height)*100}%`); } }
+function pointerEnd(){ pointerActive = false; pointer.down = false; }
+function initInteractions(){ addEventListener('mousemove', pointerMove, { passive:true }); addEventListener('touchmove', pointerMove, { passive:true }); addEventListener('mouseleave', pointerEnd); addEventListener('touchend', pointerEnd); addEventListener('mousedown', e => { pointer.down = true; collapse(e.clientX, e.clientY); }); addEventListener('touchstart', e => { const t = e.touches[0]; pointer.down = true; collapse(t.clientX,t.clientY); }, { passive:true }); document.getElementById('btn-collapse').addEventListener('click', e => { e.stopPropagation(); collapse(innerWidth/2, innerHeight/2); }); document.getElementById('btn-fracture').addEventListener('click', e => { e.stopPropagation(); collapse(innerWidth*.5, innerHeight*.5); }); document.getElementById('btn-tv').addEventListener('click', () => { forcedMode = 'tv'; applyMode('tv'); seedWorld(); setToast('TV installation forced. Press P or M to switch back.'); }); document.getElementById('btn-ascend').addEventListener('click', () => scrollTo({top:0,behavior:'smooth'})); document.querySelectorAll('.portal').forEach((p,i)=>p.addEventListener('click', e => { e.stopPropagation(); setPhase(p.dataset.phase); })); document.querySelectorAll('.device-dock button').forEach(b => b.addEventListener('click', e => { e.stopPropagation(); forcedMode = b.dataset.device === 'auto' ? null : b.dataset.device; applyMode(b.dataset.device); seedWorld(); setToast(`Preview mode: ${(forcedMode || 'auto').toUpperCase()}`); })); document.getElementById('btn-menu').addEventListener('click', e => { e.stopPropagation(); const open = document.querySelector('.nav-center'); setToast('Menu: Architectures · Chambers · Oracle · Timeline'); }); addEventListener('keydown', e => { if(e.key === 'f' || e.key === 'F') collapse(innerWidth*.5, innerHeight*.5); if(e.key === 't' || e.key === 'T'){ forcedMode = 'tv'; applyMode('tv'); seedWorld(); setToast('TV mode forced.'); } if(e.key === 'm' || e.key === 'M'){ forcedMode = 'mobile'; applyMode('mobile'); seedWorld(); setToast('Mobile mode forced.'); } if(e.key === 'p' || e.key === 'P'){ forcedMode = 'pc'; applyMode('pc'); seedWorld(); setToast('PC mode forced.'); } const n = parseInt(e.key,10); if(n >= 1 && n <= 6) setPhase(phases[n-1]); }); }
+function initOracle(){ const quotes = [
+ '“You are not late. You are a star still gathering enough gravity to ignite.”',
+ '“Fear is a telescope pointed at the wrong century.”',
+ '“You are not small. You are early in the act of becoming large.”',
+ '“A life is not wasted while it is still willing to turn.”',
+ '“The future is not waiting for permission. It is waiting for architecture.”'
+]; const range = document.getElementById('perception'); const quote = document.getElementById('quote-box'); range.addEventListener('input', () => { quote.innerHTML = quotes[range.value].replace('“','<span class="mark">“</span>').replace('”','<span class="mark">”</span>'); setPhase(phases[range.value] || 'crown'); }); const input = document.getElementById('oracle-input'); const out = document.getElementById('oracle-output'); const button = document.getElementById('oracle-btn'); const verbs = ['outgrew','weaponized','translated','consecrated','orbited','survived']; const nouns = ['fear','delay','noise','hunger','loneliness','chaos','doubt']; const verdicts = [
+  s => `Constellation registered: ${s || 'the unnamed fear'}. It does not need to disappear before you move. It only needs to become smaller than your next action.`,
+  s => `Royal verdict: ${s || 'this thought'} is not the throne. It is only a weather pattern crossing the kingdom.`,
+  s => `Star map formed: you ${verbs[Math.floor(Math.random()*verbs.length)]} ${nouns[Math.floor(Math.random()*nouns.length)]}. Begin with one honest hour.`,
+  s => `Transmission accepted. The void heard: “${s || 'I am becoming'}.” It answered by giving you another morning.`
+]; function generate(){ const s = input.value.trim().slice(0,120); out.textContent = verdicts[Math.floor(Math.random()*verdicts.length)](s); collapse(innerWidth*.5, innerHeight*.5); } button.addEventListener('click', e => { e.stopPropagation(); generate(); }); input.addEventListener('keydown', e => { if((e.ctrlKey || e.metaKey) && e.key === 'Enter') generate(); }); }
+function initReveal(){ const io = new IntersectionObserver(entries => entries.forEach(ent => { if(ent.isIntersecting){ ent.target.classList.add('visible'); io.unobserve(ent.target); } }), { threshold:.14 }); document.querySelectorAll('.reveal').forEach(el => io.observe(el)); }
+function initAudio(){ const btn = document.getElementById('btn-sound'); btn.addEventListener('click', e => { e.stopPropagation(); if(!audio.ctx){ audio.ctx = new (window.AudioContext || window.webkitAudioContext)(); audio.osc = audio.ctx.createOscillator(); audio.gain = audio.ctx.createGain(); audio.osc.type = 'sine'; audio.osc.frequency.value = 55; audio.gain.gain.value = 0; audio.osc.connect(audio.gain); audio.gain.connect(audio.ctx.destination); audio.osc.start(); } audio.on = !audio.on; audio.gain.gain.setTargetAtTime(audio.on ? .025 : 0, audio.ctx.currentTime, .08); btn.querySelector('span').textContent = audio.on ? '●' : '◌'; setToast(audio.on ? 'Ceremonial sub-bass pulse enabled.' : 'Ceremonial pulse muted.'); }); }
+function boot(){ pointer.x = innerWidth/2; pointer.y = innerHeight/2; applyMode(detectMode()); resize(); initInteractions(); initOracle(); initReveal(); initAudio(); setPhase('crown'); document.addEventListener('visibilitychange', () => { paused = document.hidden; if(!paused && !reduceMotion){ lastFrame = performance.now(); requestAnimationFrame(animate); } }); if(reduceMotion){ drawBackground(); drawStars(); drawGrid(); drawNebula(); drawVortex(); drawBlackHole(); drawSpores(); } else requestAnimationFrame(animate); let resizeTimer; addEventListener('resize', () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => { applyMode(detectMode()); resize(); }, 140); }); setToast('Cathedral initialized in optimized mode. Press 1–6 to shift laws.'); }
+boot();
+})();
+</script>
+</body>
+</html>
